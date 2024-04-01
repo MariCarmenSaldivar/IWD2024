@@ -22,7 +22,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  location = "eastus"
+  location = "eastus2"
   name     = "iwd2024"
 }
 
