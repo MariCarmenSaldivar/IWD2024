@@ -26,9 +26,9 @@ resource "azurerm_resource_group" "rg" {
   name     = "iwd2024"
 }
 
-    # An example resource that does nothing.
-    resource "null_resource" "example" {
-      triggers = {
-        value = "A example resource that does nothing!"
-      }
-    }
+
+resource "azurerm_static_site" "example" {
+  name                = "iwdstsite"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+}
