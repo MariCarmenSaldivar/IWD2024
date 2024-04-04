@@ -47,7 +47,7 @@ resource "google_storage_bucket_object" "webpage_source" {
 }
 
 # make the object publicly accessible
-resource "google_storage_object_access_control" "public_rule" {
+resource "google_storage_default_object_access_control" "public_rule_default" {
   # object = google_storage_bucket_object.webpage_source.name
   bucket = google_storage_bucket.static_site.name
   role = "READER"
