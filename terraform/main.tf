@@ -39,6 +39,21 @@ resource "google_storage_bucket" "static_site" {
   }
 }
 
+# upload index.html page to bucket
+resource "google_storage_bucket_object" "webpage_source" {
+    name = "index.html"
+    source = "staticweb/index.html"
+    bucket = google_storage_bucket.static_site.name
+}
+
+# make the object publicly accessible
+resource "google_storage_object_access_control" "public_rule" {
+  object = google_storage_bucket_object.webpage_source.name
+  bucket = google_storage_bucket.static_site.name
+  role = "READER"
+  entity = "allUsers"
+}
+
 output "website_url" {
   value = "http://${google_storage_bucket.static_site.name}.storage.googleapis.com"
 }
