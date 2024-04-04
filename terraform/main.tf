@@ -47,7 +47,7 @@ resource "google_storage_bucket_object" "webpage_source" {
 }
 
 # upload index.html page to bucket
-resource "google_storage_bucket_object" "webpage_source" {
+resource "google_storage_bucket_object" "style_css" {
     name = "index.html"
     source = "../staticweb/style.css"
     bucket = google_storage_bucket.static_site.name
