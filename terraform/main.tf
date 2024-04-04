@@ -28,17 +28,19 @@ provider "google" {
 }
 
 
-resource "google_compute_network" "vpc_network" {
-  name                    = "my-custom-mode-network"
-  auto_create_subnetworks = false
-  mtu                     = 1460
+resource "google_storage_bucket" "static_site" {
+  name          = "iwdbucket"
+  location      = "us-central1"
+  force_destroy = true
+
+  website {
+    main_page_suffix = "index.html"
+    not_found_page   = "404.html"
+  }
 }
 
-resource "google_compute_subnetwork" "default" {
-  name          = "my-custom-subnet"
-  ip_cidr_range = "10.0.1.0/24"
-  region        = "us-west1"
-  network       = google_compute_network.vpc_network.id
+output "website_url" {
+  value = "http://${google_storage_bucket.static_site.name}.storage.googleapis.com"
 }
 
 
