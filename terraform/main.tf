@@ -46,6 +46,12 @@ resource "google_storage_bucket_object" "webpage_source" {
     bucket = google_storage_bucket.static_site.name
 }
 
+# upload index.html page to bucket
+resource "google_storage_bucket_object" "webpage_source" {
+    name = "index.html"
+    source = "../staticweb/style.css"
+    bucket = google_storage_bucket.static_site.name
+}
 # make the object publicly accessible
 resource "google_storage_default_object_access_control" "public_rule_default" {
   # object = google_storage_bucket_object.webpage_source.name
