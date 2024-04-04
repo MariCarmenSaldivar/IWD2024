@@ -42,7 +42,7 @@ resource "google_storage_bucket" "static_site" {
 # upload index.html page to bucket
 resource "google_storage_bucket_object" "webpage_source" {
     name = "index.html"
-    source = "./staticweb/index.html"
+    source = "../staticweb/index.html"
     bucket = google_storage_bucket.static_site.name
 }
 
