@@ -17,5 +17,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
 COPY --from=build-env /App/out .
 ENV DOTNET_EnableDiagnostics=0
-# ENTRYPOINT ["dotnet", "app.dll"]
-ENTRYPOINT ["./app"]
+ENTRYPOINT ["dotnet", "app.dll"]
+# ENTRYPOINT ["./app"]
+
+
