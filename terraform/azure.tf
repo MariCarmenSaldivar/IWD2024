@@ -33,9 +33,7 @@ resource "azurerm_linux_web_app" "webapp" {
     minimum_tls_version = "1.2"
     application_stack {
       docker_image_name        = "msaldivar/iwdimgdemo:main"
-      docker_registry_url      = "https://index.docker.io/v1"
-      docker_registry_username = var.DOCKER_USERNAME
-      docker_registry_password = var.DOCKER_PASSWORD
+      docker_registry_url      = "https://index.docker.io"
     }
   }
 }
