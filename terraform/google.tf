@@ -5,7 +5,7 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "index.docker.io/msaldivar/personalsite:latest"
+        image = "index.docker.io/msaldivar/iwdimgdemo:main"
       }
     }
   }
