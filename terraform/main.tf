@@ -17,10 +17,6 @@
   }
   }
 
-provider "azurerm" {
-  features {}
-}
-
 provider "google" {
   project     = "iwd-2024-419319"
   region      = "us-central1"
@@ -63,15 +59,3 @@ resource "google_storage_default_object_access_control" "public_rule_default" {
 output "website_url" {
   value = "http://${google_storage_bucket.static_site.name}.storage.googleapis.com"
 }
-
-
-resource "azurerm_resource_group" "rg" {
-  location = "eastus2"
-  name     = "iwd2024"
-}
-
-# resource "azurerm_static_web_app" "example" {
-#   name                = "iwdstwebapp"
-#   resource_group_name = azurerm_resource_group.rg.name
-#   location            = azurerm_resource_group.rg.location
-# }
