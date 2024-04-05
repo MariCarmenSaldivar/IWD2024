@@ -1,13 +1,12 @@
 resource "google_cloud_run_v2_service" "default" {
   name     = "iwd-cloudrun-srv"
   location = "us-central1"
+  ingress = "INGRESS_TRAFFIC_ALL"
 
   template {
-    spec {
       containers {
         image = "index.docker.io/msaldivar/iwdimgdemo:main"
       }
-    }
   }
 
   traffic {
