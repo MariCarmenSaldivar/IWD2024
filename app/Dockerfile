@@ -5,15 +5,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["AuroiahApp.csproj", "."]
-RUN dotnet restore "AuroiahApp.csproj"
+COPY ["app.csproj", "."]
+RUN dotnet restore "app.csproj"
 COPY . .
-RUN dotnet build "AuroiahApp.csproj" -c Release -o /app/build
+RUN dotnet build "app.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "AuroiahApp.csproj" -c Release -o /app/publish
+RUN dotnet publish "app.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AuroiahApp.dll"]
+ENTRYPOINT ["dotnet", "app.dll"]
