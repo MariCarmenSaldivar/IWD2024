@@ -31,8 +31,6 @@ jobs:
           tags: |
             # dynamically set the branch name as a prefix
             type=sha,prefix={{branch}}-
-            # dynamically set the branch name and sha as a custom tag
-            type=raw,value=mytag-{{branch}}-{{sha}}
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:   
