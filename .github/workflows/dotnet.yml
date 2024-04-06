@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     outputs:
-      imagetag: ${{ steps.output.outputs.imagetag }}
+      imagetag: ${{ steps.meta.outputs.version }}
 
     steps:
       - name: Check out the repo
@@ -41,9 +41,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - id: output
-        run: echo "imagetag=${{ steps.meta.outputs.tags }}" >> "$GITHUB_OUTPUT"
-             echo ${{ steps.meta.outputs.tags }}
+      - id: version
+        run: echo "imagetag=${{ steps.meta.outputs.version }}" >> "$GITHUB_OUTPUT"
 
   build:
     runs-on: ubuntu-latest
@@ -93,12 +92,12 @@ jobs:
 
     - name: test_variable
       env:
-        TF_VAR_imagetag: ${{needs.push_to_registry.outputs.imagetag}}
+        TF_VAR_imagetag: ${{ needs.push_to_registry.outputs.imagetag }}
       run: echo "$TF_VAR_imagetag"
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
-        TF_VAR_imagetag: ${{needs.push_to_registry.outputs.imagetag}}
+        TF_VAR_imagetag: "main-7fa32d8"
       working-directory: ./terraform
       run: terraform plan -input=false
 
