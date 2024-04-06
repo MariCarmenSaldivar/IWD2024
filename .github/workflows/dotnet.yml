@@ -34,7 +34,7 @@ jobs:
           context: ./app
         #   file: Dockerfile
           push: true
-          tags: ${GITHUB_RUN_ID}
+          tags: ${{ github.run_id }}
           labels: ${{ steps.meta.outputs.labels }}
 
   build:
