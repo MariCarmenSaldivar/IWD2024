@@ -1,2 +1,1 @@
-variable "imagetag" {
-}
+variable "imagetag" {}
