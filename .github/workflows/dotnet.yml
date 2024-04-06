@@ -34,14 +34,14 @@ jobs:
           tags: |
             # dynamically set the branch name as a prefix
             type=sha,prefix={{branch}}-
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-      #   with:   
-      #     context: ./app
-      #   #   file: Dockerfile
-      #     push: true
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:   
+          context: ./app
+        #   file: Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
 
   build:
@@ -94,18 +94,10 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       working-directory: ./terraform
-      env:
-        TF_VAR_imagetag: "main-7fa32d8"
       run: terraform init
 
-    - name: test_variable
-      env:
-        TF_VAR_imagetag: ${{ needs.push_to_registry.outputs.imagetag }}
-      run: echo "$TF_VAR_imagetag"
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      env:
-        TF_VAR_imagetag: "main-7fa32d8"
       working-directory: ./terraform
       run: terraform plan -input=false
 

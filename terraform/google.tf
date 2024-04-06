@@ -5,7 +5,7 @@ resource "google_cloud_run_v2_service" "default" {
 
   template {
     containers {
-      image = "index.docker.io/msaldivar/iwdimgdemo:${imagetag}"
+      image = "index.docker.io/msaldivar/iwdimgdemo:${var.imagetag}"
     }
   }
 
