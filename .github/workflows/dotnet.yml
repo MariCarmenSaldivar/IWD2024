@@ -90,6 +90,10 @@ jobs:
       working-directory: ./terraform
       run: terraform init
 
+    - name: test_variable
+      env:
+        TF_VAR_imagetag: ${{needs.push_to_registry.outputs.imagetag}}
+      run: echo "$TF_VAR_imagetag"
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
