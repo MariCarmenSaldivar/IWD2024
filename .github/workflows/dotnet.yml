@@ -18,6 +18,7 @@ jobs:
       imagetag: ${{ steps.meta.outputs.version }}
 
     steps:
+      
       - name: Check out the repo
         uses: actions/checkout@v4
       - name: Log in to Docker Hub
@@ -33,16 +34,15 @@ jobs:
           tags: |
             # dynamically set the branch name as a prefix
             type=sha,prefix={{branch}}-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:   
-          context: ./app
-        #   file: Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-      - id: version
-        run: echo "imagetag=${{ steps.meta.outputs.version }}" >> "$GITHUB_OUTPUT"
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+      #   with:   
+      #     context: ./app
+      #   #   file: Dockerfile
+      #     push: true
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
+
 
   build:
     runs-on: ubuntu-latest
