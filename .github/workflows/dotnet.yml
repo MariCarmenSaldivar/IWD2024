@@ -81,9 +81,9 @@ jobs:
 
     - name: Add auto.vars file
       env:
-        TF_VAR_imagetag: "main-7fa32d8"
+        TF_VAR_imagetag: ${{ needs.push_to_registry.outputs.imagetag }}
       working-directory: ./terraform
-      run: echo 'imagetag=$TF_VAR_imagetag' > docker.auto.tfvars
+      run: echo "imagetag=$TF_VAR_imagetag" > docker.auto.tfvars
     
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
