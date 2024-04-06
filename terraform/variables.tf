@@ -1,0 +1,3 @@
+variable "imagetag" {
+  type = string
+}
