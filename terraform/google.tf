@@ -17,8 +17,9 @@ resource "google_cloud_run_v2_service" "default" {
 }
 
 resource "google_cloud_run_service_iam_binding" "binding" {
-  location = google_cloud_run_v2_service.default.location
-  service  = google_cloud_run_v2_service.default.name
+  count = 4
+  location = google_cloud_run_v2_service.default[count.index].location
+  service  = google_cloud_run_v2_service.default[count.index].name
   role     = "roles/run.invoker"
   members = [
     "allUsers"
