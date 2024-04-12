@@ -1,5 +1,5 @@
 resource "google_cloud_run_v2_service" "default" {
-  count = 1
+  count = 2
   name     = "iwd-cloudrun-srv${count.index}"
   location = "us-central1"
   ingress  = "INGRESS_TRAFFIC_ALL"
