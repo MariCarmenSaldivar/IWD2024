@@ -1,5 +1,5 @@
 resource "google_cloud_run_v2_service" "default" {
-  count = 5
+  count = 1
   name     = "iwd-cloudrun-srv${count.index}"
   location = "us-central1"
   ingress  = "INGRESS_TRAFFIC_ALL"
@@ -17,7 +17,7 @@ resource "google_cloud_run_v2_service" "default" {
 }
 
 resource "google_cloud_run_service_iam_binding" "binding" {
-  count = 5
+  count = 1
   location = google_cloud_run_v2_service.default[count.index].location
   service  = google_cloud_run_v2_service.default[count.index].name
   role     = "roles/run.invoker"
